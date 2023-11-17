@@ -1,4 +1,4 @@
-# Docker + PHP + Nginx + Mysql + Postgres + Redis
+# Docker + Laravel + Nginx + Mysql + Postgres
 Está imagem foi desenvolvida afim de facilitar a vida do desenvolvedor PHP, permitindo assim que de forma fácil um dev consiga executar todo o ambiente de desenvolvimento PHP. 
 
 # Imagem Docker PHP com Nginx
