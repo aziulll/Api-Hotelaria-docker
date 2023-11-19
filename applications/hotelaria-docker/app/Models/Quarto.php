@@ -10,6 +10,12 @@ class Quarto extends Model
     use HasFactory;
 
     protected $fillable = ['numero', 'capacidade', 'preco_diaria', 'disponivel'];
+
+    public function marcarComoIndisponivel()
+    {
+        $this->update(['disponivel' => false]);
+    }
+
     public function reservas()
     {
         return $this->hasMany(Reserva::class);

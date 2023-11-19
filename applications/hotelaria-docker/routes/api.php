@@ -18,10 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
+//Rotas para conseguir a auteticacao
+
+Route::post('/clientes/novo', [RegistreController::class, 'criarCliente']);
+Route::post('/login', [AuthController::class, 'auth']);
+
+//Rotas com autenticacao 
 Route::middleware('auth:sanctum')->group(function() {
     Route::post('quartos/novo', [QuartoController::class, 'criarQuarto']);
     Route::get('/quartos/disponivel', [QuartoController::class, 'listarDisponiveis']);
@@ -31,6 +34,3 @@ Route::middleware('auth:sanctum')->group(function() {
 });
 
 
-
-Route::post('/clientes/novo', [RegistreController::class, 'criarCliente']);
-Route::post('/login', [AuthController::class, 'auth']);

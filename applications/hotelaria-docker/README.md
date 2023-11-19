@@ -1,66 +1,183 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# API Hotelaria
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Utilização do Projeto
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+  1. Clone esse projeto https://github.com/aziulll/Api-Hotelaria.git 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+  2. Faça a instalação de um Ambiente de Desenvolvimento PHP
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+  2.2. Para testes em ambiente docker seguir em: 
+  https://github.com/aziulll/Api-Hotelaria-docker
 
-## Laravel Sponsors
+  2.3 Para testes em Xampp:
+  Verificar essa configuração no arquivo xampp/php/php.ini. 
+  As duas linhas a seguir devem estar sem comentários:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+  extension=pdo_pgsql
+  extension=pgsql
 
-### Premium Partners
+  3. Crie um DataBase chamado Hotelaria 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+  Com base nas informações, lembre-se de configurar o 
+  .env de acordo com as suas configurações no PostgreSQL
 
-## Contributing
+  DB_CONNECTION=pgsql
+  DB_HOST=127.0.0.1
+  DB_PORT=5432
+  DB_DATABASE=hotelaria
+  DB_USERNAME={seu_usuario_postgres}
+  DB_PASSWORD={sua_senha_postgres}
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+    
+## O que fazer no terminal antes de testar a API no Postman? 
+Abra o projeto 
+```bash
+   cd Api-Hotelaria
+```
+Crie o Arquivo .env
+```bash
+cp .env.example .env
+```
+Abrir no vscode 
+```bash
+   code .
+```
+```bash
+   php artisan migrate
+```
+```bash
+   php artisan serve
+```
 
-## Code of Conduct
+## Configurações no Postman: 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Headers para rotas sem auth**: 
 
-## Security Vulnerabilities
+```bash
+Content-Type - application/json
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Accept  - application/json
 
-## License
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Headers para rotas com auth**:
+
+```bash
+Content-Type - application/json
+
+Accept  - application/json
+
+Authorization - Bearer + Token 
+```
+
+(Bearer 1|TnfwI4aWlqvsZrNswywhL3yRxHWj072UbfJUl0CE7f6f0e26) - exemplo
+
+OBS.: Esse token será gerado no Json de Autenticação de Usuário
+
+## Realizar o consumo da API - **Cadastro de clientes** 
+
+   POST  /api/clientes/novo
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `nome, email, senha, telefone` | `string` | **Obrigatório**|
+
+Exemplo que pode ser adicionado no Body: 
+
+{
+
+    "nome": "teste",
+    "email": "teste@teste.com",
+    "senha": "123456789",
+    "telefone": "8023890"
+}
+
+## Realizar o consumo da API - **Autenticação**
+
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `email, senha` | `string` | **Obrigatório**|
+
+{
+    "email": "teste@teste.com",
+    "senha": "123456789",
+    "device_name": "teste"
+}
+
+
+
+## Documentação da API - Itens Obrigatórios 
+
+*Autenticação é um fator determinante para conseguir acessas as próximas rotas*
+
+#### Retorna uma lista de quartos disponíveis para reserva 
+
+```http
+  GET /api/quartos/disponivel
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `-` | `-` |- |
+
+
+
+#### Encontra todos os quartos que estão ocupados em uma data específica
+
+```http
+  GET /api/quartos/ocupados
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `data_inicial, data_final`      | `date` | **Obrigatório**. A data da busca |
+
+Exemplo:
+
+{
+    "data_inicial": "2023-08-20",
+    "data_final": "2023-08-30"
+}
+#### Retorna todas as reservas do cliente
+
+```http
+  GET /api/reservas/{clienteId}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `ID`      | `number` | **Obrigatório**. Id do cliente|
+
+## Melhorias
+
+Melhorias aplicadas ao teste: 
+
+- Cadastro de Reservas, Clientes e Quartos para retorno de testes manuais
+- Autenticação do Cliente para acesso às rotas com o token gerado
+
+
+## Consultas SQL 
+
+Busca todos os quartos ocupados dentro da data especifica
+
+```Bash
+SELECT q.*
+FROM quartos q
+JOIN reservas r ON q.id = r.quarto_id
+WHERE r.data_checkin <= '2023-08-20' 
+  AND r.data_checkout >= '2023-08-30';
+  ```
+## Stack utilizada
+
+**Back-end:** Laravel, PostgreSQL
+**Add**: Docker or Xampp
+**Versões**: Php - 8.2, Laravel - 10, PostgreSQL - 16
+

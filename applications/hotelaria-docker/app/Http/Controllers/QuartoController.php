@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class QuartoController extends Controller
 {
+
+    /**
+     * Metodo para criar quartos para retornar valores reais nos testes 
+     */
     public function criarQuarto(Request $request)
     {
 
@@ -29,6 +33,10 @@ class QuartoController extends Controller
         return response()->json(['message' => 'Quarto criado com sucesso', 'data' => $quarto], 201);
     }
 
+
+    /**
+     * Metodo responsavel por listar os quartos disponiveis 
+     */
     public function listarDisponiveis()
     {
 

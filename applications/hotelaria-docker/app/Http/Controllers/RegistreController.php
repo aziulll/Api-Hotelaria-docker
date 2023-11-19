@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class RegistreController extends Controller
 {
+
+    /*Metodo para criar clientes, cadastra-los no banco de dados para realizar a autenticacao
+    */
     public function criarCliente(Request $request)
     {
    
